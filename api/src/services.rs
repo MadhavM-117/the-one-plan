@@ -2,6 +2,7 @@ use crate::services::auth::{AuthService, PgAuthService};
 use crate::services::config::ServiceConfig;
 use crate::InternalResult;
 use envconfig::Envconfig;
+use crate::services::goals::{GoalsService, PgGoalsService};
 
 pub mod auth;
 pub mod config;
@@ -29,7 +30,7 @@ impl Services {
         Ok(Box::from(PgAuthService::new(self.config.clone())))
     }
 
-    pub async fn goals(&self) -> InternalResult<Box<dyn AuthService>> {
-        Ok(Box::from(PgAuthService::new(self.config.clone())))
+    pub async fn goals(&self) -> InternalResult<Box<dyn GoalsService>> {
+        Ok(Box::from(PgGoalsService::new(self.config.clone())))
     }
 }

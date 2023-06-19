@@ -1,5 +1,6 @@
-use chrono::NaiveDateTime;
+use chrono::{NaiveDateTime, Utc};
 use crate::schema::{goals, action_points};
+use crate::utils::new_id;
 
 #[derive(Queryable, Insertable, Serialize, Deserialize, Debug, Clone, AsChangeset)]
 #[serde(rename_all = "camelCase")]
@@ -11,6 +12,22 @@ pub struct Goal {
     pub description: String,
     pub created_at: NaiveDateTime,
     pub updated_at: NaiveDateTime,
+}
+
+
+impl Default for Goal {
+    fn default() -> Self {
+        let now = Utc::now().naive_utc();
+
+        Self {
+            id: new_id(),
+            user_id: "".to_string(),
+            title: "".to_string(),
+            description: "".to_string(),
+            created_at: now.clone(),
+            updated_at: now.clone()
+        }
+    }
 }
 
 
