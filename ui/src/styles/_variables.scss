@@ -1,0 +1,22 @@
+// spacing for paddings & margins -- avoid custom spaces!
+$space-small: 4px;
+$space-medium: 8px;
+$space-large: 16px;
+$space-xl: 24px;
+$space-xxl: 32px;
+$space-xxxl: 48px;
+
+// shadows for box-shadows & drop-shadows
+$shadow-small: 0 2px 4px rgb(0 0 0 / 10%);
+$shadow-medium: 0 2px 8px rgb(0 0 0 / 25%);
+$shadow-large: 0 10px 10px rgb(0 0 0 / 20%);
+
+// font-size
+$body-small: 12px;
+$title-small: 14px;
+$body-regular: 16px;
+$title-regular: 18px;
+$title-large: 24px;
+
+// z-index
+$default-z-index: 1000;

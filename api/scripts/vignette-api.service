@@ -1,0 +1,14 @@
+[Unit]
+Description=API to support vignette app
+
+[Service]
+User=root
+Environment="ROCKET_PORT=8082"
+Environment="DATABASE_URL=postgres://appuser:apppass@localhost/vignette-db"
+Environment="FILE_STORAGE_ROOT=/var/tmp/vignette"
+Environment='ROCKET_LIMITS={file = "20 MiB", form = "20 MiB", data-form = "20 MiB"
+Environment="ROCKET_SECRET_KEY=thiVxdIabhtyZMRXkWYPWvEDU7V7TR1hGYUGruDjRX4="
+ExecStart=/usr/local/bin/vignette-api
+
+[Install]
+WantedBy=multi-user.target

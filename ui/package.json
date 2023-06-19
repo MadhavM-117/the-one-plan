@@ -1,0 +1,57 @@
+{
+  "name": "vignette-ui",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "prettier --write '**/*.*{js,jsx,ts,tsx,json,css,scss}' '!build' && eslint --cache --ext .js --ext .jsx --ext .ts --ext .tsx --fix . && stylelint --fix '**/*.{css,scss}'"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
+    "classnames": "^2.3.2",
+    "immer": "^10.0.1",
+    "modern-normalize": "^1.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.10.0",
+    "wretch": "^2.5.2"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.57.1",
+    "@typescript-eslint/parser": "^5.57.1",
+    "@vitejs/plugin-react": "^3.1.0",
+    "autoprefixer": "^10.4.14",
+    "cssnano": "^6.0.0",
+    "eslint": "^8.37.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.3.4",
+    "lint-staged": "^13.2.0",
+    "postcss": "^8.4.21",
+    "prettier": "^2.8.7",
+    "sass": "^1.62.0",
+    "stylelint": "^15.6.0",
+    "stylelint-config-recommended": "^11.0.0",
+    "stylelint-config-standard-scss": "^9.0.0",
+    "typescript": "^5.0.3",
+    "vite": "^4.2.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.{css,scss}": [
+      "prettier --write",
+      "stylelint --fix"
+    ]
+  }
+}
