@@ -5,6 +5,7 @@ use envconfig::Envconfig;
 
 pub mod auth;
 pub mod config;
+pub mod goals;
 
 trait DbConnection<T> {
     fn connection(&self) -> InternalResult<T>;
@@ -25,6 +26,10 @@ impl Services {
     }
 
     pub async fn auth(&self) -> InternalResult<Box<dyn AuthService>> {
+        Ok(Box::from(PgAuthService::new(self.config.clone())))
+    }
+
+    pub async fn goals(&self) -> InternalResult<Box<dyn AuthService>> {
         Ok(Box::from(PgAuthService::new(self.config.clone())))
     }
 }
