@@ -1,9 +1,14 @@
+import { AuthApiFactory, AuthApiInterface } from "src/api/auth";
 import { BASE_URL } from "src/constants";
 
-export type ApiInterface = unknown;
+export interface ApiInterface {
+  auth: AuthApiInterface;
+}
 
 const ApiCombiner = (_baseUrl = ""): ApiInterface => {
-  return {};
+  return {
+    auth: AuthApiFactory(_baseUrl),
+  };
 };
 
 export class ApiFactory {
