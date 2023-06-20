@@ -1,3 +1,5 @@
+use serde::{Deserialize, Serialize};
+use diesel::{Queryable, Insertable, AsChangeset};
 use chrono::{NaiveDateTime, Utc};
 use crate::schema::{goals, action_points};
 use crate::utils::new_id;
@@ -42,4 +44,20 @@ pub struct ActionPoint {
     pub description: String,
     pub created_at: NaiveDateTime,
     pub updated_at: NaiveDateTime,
+}
+
+impl Default for ActionPoint {
+    fn default() -> Self {
+        let now = Utc::now().naive_utc();
+
+        Self {
+            id: new_id(),
+            goal_id: "".to_string(),
+            completed: false,
+            action_point_type: "".to_string(),
+            description: "".to_string(),
+            created_at: now.clone(),
+            updated_at: now.clone()
+        }
+    }
 }

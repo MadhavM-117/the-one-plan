@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::models::auth::{AuthSession, User};
 use crate::services::Services;
-use crate::utils::{new_id, AUTH_COOKIE_NAME};
+use crate::utils::{AUTH_COOKIE_NAME};
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct ApiGuard {

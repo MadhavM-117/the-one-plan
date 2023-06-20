@@ -1,4 +1,5 @@
-use diesel::{Connection, OptionalExtension, PgConnection, QueryDsl, RunQueryDsl};
+use async_trait::async_trait;
+use diesel::{Connection, OptionalExtension, PgConnection, QueryDsl, RunQueryDsl, ExpressionMethods};
 use dyn_clone::{clone_trait_object, DynClone};
 use crate::InternalResult;
 use crate::models::goals::{ActionPoint, Goal};
@@ -55,20 +56,22 @@ impl DbConnection<PgConnection> for PgGoalsService {
 impl GoalsService for PgGoalsService {
     async fn get_goals_by_user_id(&self, user_id: &str) -> InternalResult<Vec<Goal>> {
         Ok(goals::table
-            .filter(goal::user_id.eq(user_id))
+            .filter(goals::user_id.eq(user_id))
             .get_results(&mut self.connection()?)?)
     }
 
     async fn get_goal_by_id(&self, goal_id: &str) -> InternalResult<Option<Goal>> {
-        Ok(goals::table.filter(goal::id.eq(goal_id))
+        Ok(goals::table.filter(goals::id.eq(goal_id))
             .get_result(&mut self.connection()?)
             .optional()?)
     }
 
-    async fn save_goal(&self, goal: Goal) -> InternalResult<Goal> {
+    async fn save_goal(&self, mut goal: Goal) -> InternalResult<Goal> {
+        goal.updated_at = chrono::Utc::now().naive_utc();
+
         Ok(
             diesel::insert_into(goals::table)
-                .values(&goal).on_conflict(goal::id)
+                .values(&goal).on_conflict(goals::id)
                 .do_update()
                 .set(&goal)
                 .get_result(&mut self.connection()?)?
@@ -76,26 +79,27 @@ impl GoalsService for PgGoalsService {
     }
 
     async fn delete_goal(&self, goal: Goal) -> InternalResult<()> {
-        Ok(diesel::delete(goals::table.filter(goal::id.eq(goal.id)))
+        Ok(diesel::delete(goals::table.filter(goals::id.eq(goal.id)))
             .execute(&mut self.connection()?).map(|_| ())?)
     }
 
     async fn get_action_points_by_goal_id(&self, goal_id: &str) -> InternalResult<Vec<ActionPoint>> {
         Ok(action_points::table
-            .filter(action_point::goal_id.eq(goal_id))
+            .filter(action_points::goal_id.eq(goal_id))
             .get_results(&mut self.connection()?)?)
     }
 
     async fn get_action_point_by_id(&self, action_point_id: &str) -> InternalResult<Option<ActionPoint>> {
-        Ok(action_points::table.filter(action_point::id.eq(action_point_id))
+        Ok(action_points::table.filter(action_points::id.eq(action_point_id))
             .get_result(&mut self.connection()?)
             .optional()?)
     }
 
-    async fn save_action_point(&self, action_point: ActionPoint) -> InternalResult<ActionPoint> {
+    async fn save_action_point(&self, mut action_point: ActionPoint) -> InternalResult<ActionPoint> {
+        action_point.updated_at = chrono::Utc::now().naive_utc();
         Ok(
             diesel::insert_into(action_points::table)
-                .values(&action_point).on_conflict(action_point::id)
+                .values(&action_point).on_conflict(action_points::id)
                 .do_update()
                 .set(&action_point)
                 .get_result(&mut self.connection()?)?
@@ -103,7 +107,7 @@ impl GoalsService for PgGoalsService {
     }
 
     async fn delete_action_point(&self, action_point: ActionPoint) -> InternalResult<()> {
-        Ok(diesel::delete(action_points::table.filter(action_point::id.eq(action_point.id)))
+        Ok(diesel::delete(action_points::table.filter(action_points::id.eq(action_point.id)))
             .execute(&mut self.connection()?).map(|_| ())?)
     }
 }
