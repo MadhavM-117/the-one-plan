@@ -1,3 +1,5 @@
+@import "src/styles/variables";
+
 .container {
   display: flex;
   flex-direction: column;
@@ -5,6 +7,11 @@
 
 .header-container {
   height: 80px;
+  padding: 0 $space-xl;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: $shadow-medium;
 }
 
 .content-container {
