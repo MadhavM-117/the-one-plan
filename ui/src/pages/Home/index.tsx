@@ -1,5 +1,6 @@
 import React from "react";
+import { ContentContainer } from "src/components/Containers";
 
 export const Home: React.FC = () => {
-  return <div>Home</div>;
+  return <ContentContainer>Home</ContentContainer>;
 };

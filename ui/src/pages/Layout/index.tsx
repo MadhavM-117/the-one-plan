@@ -14,5 +14,5 @@ export const Layout: React.FC = () => {
 };
 
 export const Header: React.FC = () => {
-  return <div className={styles.headerContainer}>Header</div>;
+  return <div className={styles.headerContainer}>The One Plan</div>;
 };
