@@ -1,0 +1,16 @@
+.create-goal-button {
+    margin-top: 20px;
+    width: 100%;
+    height: 50px;
+    background-color: #2ecc71;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+        background-color: #27ae60;
+    }
+}
