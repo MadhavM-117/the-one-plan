@@ -16,3 +16,23 @@ export interface ActionPoint {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface UpdateGoalRequest {
+  title?: string;
+  description?: string;
+}
+
+export interface CreateGoalRequest {
+  title: string;
+  description: string;
+}
+
+export interface CreateActionPointRequest {
+  actionPointType: string;
+  description: string;
+}
+
+export interface UpdateActionPointRequest {
+  description?: string;
+  completed?: boolean;
+}

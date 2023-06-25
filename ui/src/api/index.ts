@@ -1,13 +1,16 @@
 import { AuthApiFactory, AuthApiInterface } from "src/api/auth";
+import { GoalApiFactory, GoalApiInterface } from "src/api/goal";
 import { BASE_URL } from "src/constants";
 
 export interface ApiInterface {
   auth: AuthApiInterface;
+  goals: GoalApiInterface;
 }
 
 const ApiCombiner = (_baseUrl = ""): ApiInterface => {
   return {
     auth: AuthApiFactory(_baseUrl),
+    goals: GoalApiFactory(_baseUrl),
   };
 };
 

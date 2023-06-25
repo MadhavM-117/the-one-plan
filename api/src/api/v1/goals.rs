@@ -134,6 +134,7 @@ pub async fn get_action_points(
 }
 
 #[derive(Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct CreateActionPointRequest {
     pub action_point_type: String,
     pub description: String,
